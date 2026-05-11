@@ -1,0 +1,11 @@
+Design and implement an in-memory rate limiter. 
+
+This service should allow you to control the number of requests a specific identifier (eg user, IP address) can make within a given time window. 
+
+Focus on creating a well-structured and functional end to end solution with clear logic.
+
+We will be testing the system with the help of REST API’s in the end
+Use any programming language and framework of your choice
+Implement proper error handling and input validation
+Write clean, maintainable code with appropriate comments
+
