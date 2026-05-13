@@ -1,0 +1,71 @@
+1st Round
+
+1st question:
+Design and implement a payment API for e-commerce website that prevents duplicate payment processing
+ when clients retry requests due to timeouts/network failures.
+
+Requirements:
+1. Multiple retries may happen
+2. Requests may hit different backend instances
+3. Must prevent duplicate payment execution
+4. Must return same response for retries
+5. API should scale horizontally
+
+
+API:
+POST
+{Base_URL}/api/v1/product/payment/
+Headers:
+request_id: UUID(String)
+clientId: String
+
+Req_body:
+{
+
+   productName: "",
+   price: ""
+}
+
+if request_id exist in Redis:
+    return "reqeust already processing"
+
+save in Redis (Client_id_request_id, "Started");
+
+boolean locked = SETNX(Client_id_request_id, "Started");
+if(locked) {
+-----
+Do work SYNC
+one work done
+----
+Delete from Redis(Client_id_request_id)
+}
+return
+
+
+2nd question-----
+SLIDING window
+
+paylaod = userId
+Rate limiter:
+
+max request allowed = 5
+TimeFrame = 10 sec
+isAllowed(userId){
+
+}
+
+1st case
+req time: 2 3 5 6 10 -> allowed
+
+2nd case
+req time: 2 3 5 7 9 : allow, 11 not allowed, 12 not allowed, 13 allowed, 14
+
+Deque:
+window
+[2 3 5 7 9]
+
+2 5 15
+
+
+
+
