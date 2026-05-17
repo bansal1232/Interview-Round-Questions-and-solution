@@ -1,0 +1,104 @@
+1st question:Design Twitter : HLD only
+
+Solution which I provide:
+Twitter HLD
+
+Functional requirements 
+
+1. User can post request, Text, Audio, Image, Videos
+2. User shud login to platform 
+3. Use can upload Profile info, like name, gender, DOB
+4. History of all posts that user did
+5. User can read other posts like, comment, repost
+6. User can follow/unfollow other people, News page
+7. User can send messages to other users
+8. Populate users feed/timeline as per their followers -: Feed
+9. Viral/Trending tweet should be seen to all users
+10. Notify users tweet notification to all whom he has followed 
+11.  Edit can be there 
+12. Search Post
+
+Non - functional requirements 
+1. Tweet should be seen to their followers immediately 
+2. Read > write , read heavy system
+3. Eventual consistency 
+4. System shud be available 24*7
+
+
+500 *10^6 Total users = 5*10^8 users
+DAU: 1 million
+
+Tweeting users: 1 Lakh
+
+Write side:
+
+Tweet size: 256 char = 256*8 bytes 
+
+
+
+Read:
+Cache, DB, Kafka, servers, CDN (for cache)
+
+Service:
+1. Encoding/Decoding service 
+2. Auth Server
+
+Notification server
+Auth server (Rate limiting)
+
+
+DB: 
+NoSQL
+Key value, 
+JSON
+
+
+Data modelling
+NoSQL: MongoDB
+Post:
+
+User
+{
+    	
+}
+
+TweetDetails:{
+	userId:
+	tweetDetails: {
+		Id		Text: “”,
+		ImageS3URL: “”,
+		VideoS3Url:””
+	}
+createdAt:
+updateAt:
+likeCount: 
+
+Commet:[
+{}
+{}
+
+]
+	
+}
+
+
+
+
+
+User details
+{
+	userId: String
+	name:
+	tweetType:[Text, IMAGE]
+	tweetCount = Integer
+	follwersCount: 
+	likesCount 
+	likedTweetId
+}
+
+
+
+---
+
+
+2nd question: https://leetcode.com/problems/design-twitter/description/

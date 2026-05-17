@@ -1,0 +1,88 @@
+1st round
+Identify all issues
+
+import java.util.*;
+import java.util.concurrent.CountDownLatch;
+
+class WalletService {
+    private int balance = 1000;
+
+    private final List<String> logs = new ArrayList<>();
+
+    public boolean withdraw(int amount, String user) {
+        try {
+            if (balance >= amount) {
+                Thread.sleep(100);
+                balance -= amount;
+                logs.add(user + " withdrew " + amount);
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+}
+
+class App {
+    public static void main(String[] args) throws InterruptedException {
+        WalletService ws = new WalletService();
+
+        Thread t1 = new Thread(() -> System.out.println(ws.withdraw(700, "u1")));
+        Thread t2 = new Thread(() -> System.out.println(ws.withdraw(700, "u2")));
+
+        t1.start();
+        t2.start();
+
+
+        System.out.println(ws.balance);
+    }
+}
+
+/*
+1. balance not accessible as its private
+* */
+------------------------------------------------------------------------------
+2nd question:
+Problem 1- Given an array of non-negative integers arr[], arrange them such that their concatenation forms the largest possible number.
+ Return the result as a string, since it may be too large for standard integer types.
+
+Examples:
+Input: arr[] = [3, 30, 34, 5, 9]
+Output: 9534330
+Explanation: The arrangement [9, 5, 34, 3, 30], gives the largest value 9534330.
+
+Input: arr[] = [54, 546, 548, 60]
+Output: 6054854654
+Explanation: The arrangement [60, 548, 546, 54], gives the largest value 6054854654.
+Example 3:
+Input: nums = [10,2]
+Output: "210"
+-----------------------------------------------------------------
+
+3rd question
+You are given an integer n. There are n rooms numbered from 0 to n - 1.
+
+You are given a 2D integer array meetings where meetings[i] = [starti, endi] means that a meeting will be held during the half-closed time interval [starti, endi). All the values of starti are unique.
+
+Meetings are allocated to rooms in the following manner:
+
+Each meeting will take place in the unused room with the lowest number.
+If there are no available rooms, the meeting will be delayed until a room becomes free. The delayed meeting should have the same duration as the original meeting.
+When a room becomes unused, meetings that have an earlier original start time should be given the room.
+Return the number of the room that held the most meetings. If there are multiple rooms, return the room with the lowest number.
+
+Example 1:
+
+Input: n = 2, meetings = [[0,10],[1,5],[2,7],[3,4]]
+Output: 0
+Explanation:
+- At time 0, both rooms are not being used. The first meeting starts in room 0.
+- At time 1, only room 1 is not being used. The second meeting starts in room 1.
+- At time 2, both rooms are being used. The third meeting is delayed.
+- At time 3, both rooms are being used. The fourth meeting is delayed.
+
+- At time 5, the meeting in room 1 finishes. The third meeting starts in room 1 for the time period [5,10).
+- At time 10, the meetings in both rooms finish. The fourth meeting starts in room 0 for the time period [10,11).
+Both rooms 0 and 1 held 2 meetings, so we return 0.
